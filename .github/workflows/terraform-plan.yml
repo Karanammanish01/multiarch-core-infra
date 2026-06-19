@@ -1,7 +1,7 @@
 name: Terraform Plan
 
 on:
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -23,14 +23,17 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::123456789012:role/GitHubTerraformRole
-          aws-region: ap-south-1
+          role-to-assume: arn:aws:iam::646177707953:oidc-provider/token.actions.githubusercontent.com
+          aws-region: us-east-1
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Terraform FMT
+        run: terraform fmt
 
       - name: Terraform Validate
         run: terraform validate
