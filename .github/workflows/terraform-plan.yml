@@ -76,8 +76,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Terraform State List
+        run: terraform state list || true
+
       - name: Create Plan 
-        run: terraform plan -out=tfplan 
+        run: terraform plan -input=false -lock-timeout=30s -out=tfplan 
 
       - name: Generate Human Readable Plan 
         run: terraform show -no-color tfplan > tfplan.txt 
