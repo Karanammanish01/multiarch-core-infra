@@ -49,6 +49,23 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+      
+      - name: Init TFLint
+        run: tflint --init 
+      
+      - name: Run TFLint
+        run: tflint
+      
+      - name: Run TFSec
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          working_directory: environment/dev
+      
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: environment/dev
+          framwork: terraform
 
   plan:
     name: Plan
