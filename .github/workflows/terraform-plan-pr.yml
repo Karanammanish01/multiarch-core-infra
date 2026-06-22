@@ -1,7 +1,9 @@
-name: Terraform Plan
+name: Terraform Plan PR Validation
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 permissions:
   id-token: write
@@ -50,25 +52,11 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
       
-      # - name: Setup TFLint
-      #   run: terraform-linters/setup-tflint@v4
-      
-      # - name: Init TFLint
-      #   run: tflint --init 
-      
-      # - name: Run TFLint
-      #   run: tflint
-      
-      # - name: Run TFSec
-      #   uses: aquasecurity/tfsec-action@v1.0.3
-      #   with:
-      #     working_directory: environment/dev
-      
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
         with:
           directory: environment/dev
-          framwork: terraform
+          framework: terraform
 
   plan:
     name: Plan
@@ -116,6 +104,11 @@ jobs:
         with: 
           name: terraform-plan-output 
           path: environment/dev/tfplan.txt
+
+      - name: Publish Plan Summary
+        run: |
+          echo "## Terraform Plan" >> $GITHUB_STEP_SUMMARY
+          cat tfplan.txt >> $GITHUB_STEP_SUMMARY
 
   apply:
     name: Apply
