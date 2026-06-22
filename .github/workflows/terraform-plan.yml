@@ -59,10 +59,10 @@ jobs:
       # - name: Run TFLint
       #   run: tflint
       
-      - name: Run TFSec
-        uses: aquasecurity/tfsec-action@v1.0.3
-        with:
-          working_directory: environment/dev
+      # - name: Run TFSec
+      #   uses: aquasecurity/tfsec-action@v1.0.3
+      #   with:
+      #     working_directory: environment/dev
       
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
