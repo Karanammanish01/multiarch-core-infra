@@ -13,3 +13,10 @@ resource "aws_vpc" "vpc_block" {
 
   tags = local.merged_tags
 }
+
+resource "aws_default_security_group" "this" {
+  vpc_id = aws_vpc.vpc_block.id
+
+  ingress = []
+  egress  = []
+}
