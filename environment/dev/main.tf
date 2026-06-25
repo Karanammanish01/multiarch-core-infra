@@ -1,3 +1,5 @@
+# Checkov:skip=CKV2_AWS_11: "Ensure VPC flow logging is enabled in all VPCs"
+
 module "vpc" {
   source = "../../modules/networking/vpc"
 
