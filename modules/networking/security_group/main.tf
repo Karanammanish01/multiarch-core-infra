@@ -1,4 +1,3 @@
-#checkov:skip=CKV2_AWS_5: Security group is a reusable module and will be attached by consuming resources
 
 locals {
   base_tags = {
@@ -8,6 +7,7 @@ locals {
   merged_tags = merge(local.base_tags, var.tags)
 }
 
+#checkov:skip=CKV2_AWS_5: Security group is a reusable module and will be attached by consuming resources
 resource "aws_security_group" "this" {
   name        = var.name
   description = "Rule for the Inbound and Outbound"
