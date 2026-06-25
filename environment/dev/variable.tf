@@ -5,3 +5,7 @@ variable "aws_region" {
 variable "cidr_block" {
   type = string
 }
+
+variable "security_group_name" {
+  type = string
+}
