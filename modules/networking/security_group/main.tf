@@ -1,3 +1,12 @@
+#checkov:skip=CKV2_AWS_5: Security group is a reusable module and will be attached by consuming resources
+
+resource "aws_security_group" "this" {
+  name        = var.name
+  description = "Rule for the Inbound and Outbound"
+
+  vpc_id = var.vpc_id
+}
+
 locals {
   base_tags = {
     module = "security_group"
