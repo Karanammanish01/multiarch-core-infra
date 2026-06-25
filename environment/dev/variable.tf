@@ -9,3 +9,11 @@ variable "cidr_block" {
 variable "security_group_name" {
   type = string
 }
+
+variable "subnets" {
+  description = "CIDR BLock value"
+
+  type = map(object({
+    cidr_block = string
+  }))
+}
